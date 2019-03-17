@@ -13,6 +13,7 @@
 * [flask login](https://flask-login.readthedocs.io/en/latest/)
 * [flask cache](http://exploreflask.com/en/latest/views.html)
 * [flask appbuilder](ttps://flask-appbuilder.readthedocs.io/en/latest/intro.html)
+* [flask themes](https://pythonhosted.org/Flask-Themes/)
 
 ## Other usefull python libraries
 * [python rrdtool](https://pypi.org/project/python-rrdtool/)

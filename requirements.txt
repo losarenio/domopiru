@@ -1,4 +1,4 @@
-Flask=1.0.2
-Flask-Menu=0.7.0
-pylint=2.3.1
-rrdtool=0.1.14
+Flask==1.0.2
+Flask-Menu==0.7.0
+pylint==2.3.1
+rrdtool==0.1.14
