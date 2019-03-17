@@ -4,6 +4,9 @@
 * [Official Flask tutorial](http://flask.pocoo.org/)
 * [Official Documentation](http://exploreflask.com/en/latest/blueprints.html)
 
+## Project structure manuals/examples
+* https://www.patricksoftwareblog.com/structuring-a-flask-project/
+* 
 
 ## Flask modules and options
 * [peewee orm (admin interface for flask)](https://peewee.readthedocs.io/en/latest/)
@@ -14,6 +17,7 @@
 * [flask cache](http://exploreflask.com/en/latest/views.html)
 * [flask appbuilder](ttps://flask-appbuilder.readthedocs.io/en/latest/intro.html)
 * [flask themes](https://pythonhosted.org/Flask-Themes/)
+* [cmd line commands](http://flask.pocoo.org/docs/1.0/cli/#cli)
 
 ## Other usefull python libraries
 * [python rrdtool](https://pypi.org/project/python-rrdtool/)
