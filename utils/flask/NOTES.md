@@ -19,4 +19,8 @@
 * [ZeroMQ python](http://zguide.zeromq.org/py:hwserver)
 
 
+### Camera streaming examples
+* [Camera Streaming with Flask I](https://www.hackster.io/ruchir1674/video-streaming-on-flask-server-using-rpi-ef3d75)
+* [Camera Streaming with Flask II](https://blog.miguelgrinberg.com/post/video-streaming-with-flask)
+
 
