@@ -50,6 +50,9 @@ def create_app(test_config=None):
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
 
+    from . import agent
+    app.register_blueprint(agent.bp)
+
     return app
 
 app = create_app()
@@ -58,7 +61,7 @@ nav = Navigation(app)
 
 nav.Bar('top', [
     nav.Item('Dashboard', 'notjetimplemented'),
-    nav.Item('Monitors', 'notjetimplemented'),
+    nav.Item('Agents', 'agent.index'),
     nav.Item('Actions', 'notjetimplemented'),
     nav.Item('Rules', 'notjetimplemented'),
     nav.Item('Admin', 'notjetimplemented')

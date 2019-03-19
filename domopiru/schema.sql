@@ -21,7 +21,8 @@ CREATE TABLE post (
 
 CREATE TABLE agent (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  status INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'UNREGISTERED',
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   ip TEXT NOT NULL,
   port TEXT NOT NULL
@@ -29,8 +30,14 @@ CREATE TABLE agent (
 
 CREATE TABLE minion(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  status INTEGER NOT NULL,
-  type INTEGER NOT NULL,
+  agent_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'unknown',
+  type TEXT NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (agent_id) REFERENCES agent (id)
 );
+
+INSERT INTO agent (name, status, ip, port) VALUES (1, 'local', 'RUNNING', 'x.x.x.x', 9999);
+INSERT INTO minion (name, agent_id, status, type) VALUES('temperatura', 1, 'OK', 'monitor', );
+INSERT INTO minion (name, agent_id, status, type) VALUES('radiador', 1, 'OK', 'actuators', );

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Agents{% endblock %}</h1>
+{#
+  {% if g.user %}
+    <a class="action" href="{{ url_for('agent.create') }}">New</a>
+  {% endif %}
+#}
+{% endblock %}
+
+{% block content %}
+  <table border=0 with=50%>
+    <tr>
+      <td>id</td><td>name</td><td>ip:port</td><td>status</td>
+    </tr>
+    {% for agent in agents %}
+      <tr>
+        <td>{{ agent.id }}</td>
+        <td>{{ agent.name }}</td>
+        <td>{{ agent.ip }}:{{ agent.port }}</td>
+        <td>{{ agent.status }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
