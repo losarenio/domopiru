@@ -6,7 +6,7 @@
 
 ## Project structure manuals/examples
 * https://www.patricksoftwareblog.com/structuring-a-flask-project/
-* 
+
 
 ## Flask modules and options
 * [peewee orm (admin interface for flask)](https://peewee.readthedocs.io/en/latest/)

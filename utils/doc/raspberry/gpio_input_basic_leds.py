@@ -22,7 +22,7 @@ GPIO.output(VERDE, GPIO.HIGH)
 GPIO.output(AMARILLO, GPIO.HIGH)
 
 time.sleep(0.5)
- 
+
 try:
     while True:
         rnd_color = colores[random.randint(0,2)]

@@ -1,7 +1,11 @@
 "DOMOPIRU - v0.001 - 2019-03-16"
 
 import os
-from flask import Flask
+from flask import Flask, render_template
+from flask_navigation import Navigation
+
+## http://flask.pocoo.org/docs/1.0/
+## next: http://flask.pocoo.org/docs/1.0/tutorial/install/
 
 def create_app(test_config=None):
     # create and configure the app
@@ -29,6 +33,11 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
+    @app.route('/notjetimplemented')
+    def notjetimplemented():
+        return render_template('notjetimplemented.html')
+
+
     # preparing database
     from . import db
     db.init_app(app)
@@ -45,6 +54,16 @@ def create_app(test_config=None):
 
 app = create_app()
 
+nav = Navigation(app)
 
-## http://flask.pocoo.org/docs/1.0/
-## next: http://flask.pocoo.org/docs/1.0/tutorial/install/
+nav.Bar('top', [
+    nav.Item('Dashboard', 'notjetimplemented'),
+    nav.Item('Monitors', 'notjetimplemented'),
+    nav.Item('Actions', 'notjetimplemented'),
+    nav.Item('Rules', 'notjetimplemented'),
+    nav.Item('Admin', 'notjetimplemented')
+])
+
+
+
+

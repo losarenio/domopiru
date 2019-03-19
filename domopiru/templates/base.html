@@ -2,7 +2,7 @@
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1>Flaskr</h1>
+  <h1>DOMOPIRU {{ nav.top.current_item.label }}</h1>
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
@@ -11,6 +11,16 @@
       <li><a href="{{ url_for('auth.register') }}">Register</a>
       <li><a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
+  </ul>
+</nav>
+
+<nav>
+  <ul>
+    {% for item in nav.top %}
+      <li class="{{ 'active' if item.is_active else '' }}">
+        <a href="{{ item.url }}">{{ item.label }}</a>
+      </li>
+    {% endfor %}
   </ul>
 </nav>
 <section class="content">
