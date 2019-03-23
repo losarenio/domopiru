@@ -1,8 +1,9 @@
 # Flask notes
 
 ## Doc, manuals and examples
-* [Official Flask tutorial](http://flask.pocoo.org/)
+* [Official Flask tutorial](http://flask.pocoo.org/docs/1.0/)
 * [Official Documentation](http://exploreflask.com/en/latest/blueprints.html)
+* [custom logging format](http://flask.pocoo.org/docs/dev/logging/)
 
 ## Project structure manuals/examples
 * https://www.patricksoftwareblog.com/structuring-a-flask-project/

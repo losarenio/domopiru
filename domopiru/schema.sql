@@ -38,6 +38,6 @@ CREATE TABLE minion(
   FOREIGN KEY (agent_id) REFERENCES agent (id)
 );
 
-INSERT INTO agent (name, status, ip, port) VALUES (1, 'local', 'RUNNING', 'x.x.x.x', 9999);
-INSERT INTO minion (name, agent_id, status, type) VALUES('temperatura', 1, 'OK', 'monitor', );
-INSERT INTO minion (name, agent_id, status, type) VALUES('radiador', 1, 'OK', 'actuators', );
+INSERT INTO agent (id, name, status, ip, port) VALUES (1, 'local', 'RUNNING', 'x.x.x.x', 9999);
+INSERT INTO minion (name, agent_id, status, type) VALUES('temperatura', 1, 'OK', 'monitor');
+INSERT INTO minion (name, agent_id, status, type) VALUES('radiador', 1, 'OK', 'actuators');
