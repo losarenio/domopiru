@@ -1,0 +1,43 @@
+table.ex_table_3 caption {
+  font-size: 1.5em;
+  padding: 10px 5px;
+}
+.ex_table_3 th, .ex_table_3 td:nth-child(1) {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+.ex_table_3 td, .ex_table_3 th{
+  text-align: center; padding: 5px;
+}
+ .ex_table_3 tfoot tr:nth-child(1n+2) td {
+  font-size: .9em;
+  font-weight: normal;
+  text-align: left;
+}
+.ex_table_3 tfoot tr td, .ex_table_3 tbody tr td, .ex_table_3 thead tr th {
+  border: none;
+}
+.ex_table_3 tbody tr:nth-child(even) {
+  background-color: #efecca;
+}
+
+.ex_table_3 tfoot tr:nth-child(odd) {
+  background-color: #efecca;
+}
+table.ex_table_3 {
+  border: none;
+}
+.ex_table_3 thead {
+  background-color: #a7a37e;
+} @media only screen and (max-width: 780px) {
+.ex_table_3 table, .ex_table_3 thead, .ex_table_3 tbody, .ex_table_3 tfoot, .ex_table_3 tr, .ex_table_3 th, .ex_table_3 td {
+display: block;
+}
+.ex_table_3 thead tr, .ex_table_3 tfoot tr:nth-of-type(1) {
+  position: absolute; top: -9999px; left: -9999px;
+}
+
+.ex_table_3 td { position: relative; padding-left: 50%; }
+.ex_table_3 tfoot tr td { padding-left: 0%; text-align: left; }
+.ex_table_3 td:before { position: absolute; top: 5px; left: 5px; white-space: nowrap; text-align: left; }
+}

@@ -30,3 +30,6 @@
 * [Camera Streaming with Flask II](https://blog.miguelgrinberg.com/post/video-streaming-with-flask)
 
 
+## Design
+* [Flask-Table](https://flask-table.readthedocs.io/en/stable/)
+* [format table example](https://sarahleejane.github.io/learning/python/2015/08/09/simple-tables-in-webapps-using-flask-and-pandas-with-python.html)

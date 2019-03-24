@@ -2,7 +2,7 @@
 import logging
 
 from flask import (Blueprint, render_template, flash, url_for, request)
-from flask_table import Table, Col, DatetimeCol, LinkCol, ButtonCol
+from flask_table import Table, Col, DatetimeCol
 
 from domopiru.db import get_db
 
@@ -10,7 +10,7 @@ bp = Blueprint('agent', __name__, url_prefix='/agent')
 
 logger = logging.getLogger('agent')
 
-@bp.route('/index', methods=['GET', 'POST'])
+@bp.route('/index')
 def index():
     # logger.debug("request from %s - %s", request.url, request.remote_addr)
 
@@ -66,10 +66,6 @@ class TableAgent(Table):
     created = DatetimeCol('created')
     ip = Col('IP')
     port = Col('port')
-    show_minions1 = LinkCol('minions', 'agent.index', url_kwargs=dict(agent='name'),
-                           allow_sort=False)
-    show_minions2 = ButtonCol('minions', 'agent.index', url_kwargs=dict(agent='name'),
-                           allow_sort=False)
 
     def sort_url(self, col_key, reverse=False):
         if reverse:
@@ -78,6 +74,15 @@ class TableAgent(Table):
             direction = 'asc'
 
         return url_for('agent.index', sort=col_key, direction=direction)
+
+class TableMinion(Table):
+    allow_sort = False
+
+    _id = Col('id')
+    name = Col('name')
+    status = Col('status')
+    _type = Col('type')
+    created = DatetimeCol('created')
 
 class ItemMinion():
     def __init__(self, _id, name, status, _type, created):
