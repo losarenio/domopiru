@@ -2,7 +2,7 @@
 import logging
 
 from flask import (Blueprint, render_template, flash, url_for, request)
-from flask_table import Table, Col, DatetimeCol, LinkCol, ButtonCol
+from flask_table import Table, Col, DatetimeCol, NestedTableCol
 
 from domopiru.db import get_db
 
@@ -10,7 +10,7 @@ bp = Blueprint('agent', __name__, url_prefix='/agent')
 
 logger = logging.getLogger('agent')
 
-@bp.route('/index', methods=['GET', 'POST'])
+@bp.route('/index')
 def index():
     # logger.debug("request from %s - %s", request.url, request.remote_addr)
 
@@ -25,6 +25,50 @@ def index():
         flash("No agents connected!!")
 
     return render_template('agent/index.html', table_agent=table_agent)
+
+def get_table_minions(agent_id):
+
+    db = get_db()
+    minions = db.execute(
+        'SELECT id, name, status, type, created'
+        '  FROM minion'
+        '  WHERE agent_id == ?'
+        '  ORDER BY name',str(agent_id)).fetchall()
+
+    logger.info("   getting %s minions", len(minions))
+
+    minion_list = []
+    table_minions = None
+    for row in minions:
+        logger.info("minion: %s %s %s %s %s",
+                    row[0], row[1], row[2], row[3],row[4])
+        minion_list.append(ItemMinion(row[0], row[1], row[2], row[3], row[4]))
+
+    table_minions = TableMinion(minion_list)
+
+    logger.debug("subtable: \n%s\n", table_minions.__html__())
+
+    return table_minions
+
+
+def get_list_minions(agent_id):
+
+    db = get_db()
+    minions = db.execute(
+        'SELECT id, name, status, type, created'
+        '  FROM minion'
+        '  WHERE agent_id == ?'
+        '  ORDER BY name',str(agent_id)).fetchall()
+
+    logger.info("   getting %s minions", len(minions))
+
+    minion_list = []
+    for row in minions:
+        logger.info("minion: %s %s %s %s %s",
+                    row[0], row[1], row[2], row[3],row[4])
+        minion_list.append(ItemMinion(row[0], row[1], row[2], row[3], row[4]))
+
+    return minion_list
 
 def get_table_agents(col_key='created', direction=False):
     _direction = 'asc'
@@ -46,16 +90,28 @@ def get_table_agents(col_key='created', direction=False):
     agent_list = []
     table_agents = None
     for row in agents:
-        logger.info("%s %s %s %s %s %s",
+        logger.info("agent: %s %s %s %s %s %s",
                     row[0], row[1], row[2], row[3], row[4], row[5])
 
-        agent_list.append(ItemAgent(row[0], row[1], row[2], row[3],
-                                    row[4], row[5]))
+        logger.info("Geting table minions of agent_id: %s", row[0])
 
-        table_agents = TableAgent(agent_list, sort_by=col_key,
-                                  sort_reverse=direction, border=3)
+        agent_list.append(ItemAgent(row[0], row[1], row[2], row[3], row[4],
+                                    row[5], get_list_minions(row[0])))
+
+
+    table_agents = TableAgent(agent_list, sort_by=col_key,
+                              sort_reverse=direction, border=3)
 
     return table_agents
+
+class TableMinion(Table):
+    allow_sort = False
+
+    _id = Col('id')
+    name = Col('name')
+    status = Col('status')
+    _type = Col('type')
+    created = DatetimeCol('created')
 
 class TableAgent(Table):
     allow_sort = True
@@ -66,10 +122,7 @@ class TableAgent(Table):
     created = DatetimeCol('created')
     ip = Col('IP')
     port = Col('port')
-    show_minions1 = LinkCol('minions', 'agent.index', url_kwargs=dict(agent='name'),
-                           allow_sort=False)
-    show_minions2 = ButtonCol('minions', 'agent.index', url_kwargs=dict(agent='name'),
-                           allow_sort=False)
+    minions = NestedTableCol('minions', TableMinion)
 
     def sort_url(self, col_key, reverse=False):
         if reverse:
@@ -79,6 +132,16 @@ class TableAgent(Table):
 
         return url_for('agent.index', sort=col_key, direction=direction)
 
+class ItemAgent():
+    def __init__(self, _id, name, status, created, ip, port, minions):
+        self._id = _id
+        self.name = name
+        self.status = status
+        self.created = created
+        self.ip = ip
+        self.port = port
+        self.minions = minions
+
 class ItemMinion():
     def __init__(self, _id, name, status, _type, created):
         self._id = _id
@@ -86,13 +149,3 @@ class ItemMinion():
         self.status = status
         self.created = created
         self._type = _type
-
-
-class ItemAgent():
-    def __init__(self, _id, name, status, created, ip, port):
-        self._id = _id
-        self.name = name
-        self.status = status
-        self.created = created
-        self.ip = ip
-        self.port = port
