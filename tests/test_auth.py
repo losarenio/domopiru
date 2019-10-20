@@ -15,7 +15,6 @@ def test_register(client, app):
             "select * from user where username = 'a'",
         ).fetchone() is not None
 
-
 @pytest.mark.parametrize(('username', 'password', 'message'), (
     ('', '', b'Username is required.'),
     ('a', '', b'Password is required.'),
@@ -37,7 +36,6 @@ def test_login(client, auth):
         client.get('/')
         assert session['user_id'] == 1
         assert g.user['username'] == 'test'
-
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (
     ('a', 'test', b'Incorrect username.'),
