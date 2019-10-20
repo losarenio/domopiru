@@ -1,14 +1,16 @@
 "DOMOPIRU - v0.001 - 2019-03-16"
 
-import os
-import json
-import yaml
-import logging
 
+
+import json
+import logging
 from logging.config import dictConfig
+import os
+import yaml
 
 from flask import Flask, render_template, request
 from flask_navigation import Navigation
+
 
 ## http://flask.pocoo.org/docs/1.0/
 ## next: http://flask.pocoo.org/docs/1.0/tutorial/install/
@@ -23,7 +25,7 @@ def create_app(test_config=None):
     )
 
     with open(os.path.join(app.instance_path,'logging.yaml')) as lcf:
-        dictConfig(yaml.load(lcf.read(), Loader=yaml.FullLoader))
+        dictConfig(yaml.load(lcf.read()))
 
     nav = Navigation(app)
     nav.Bar('top', [
@@ -32,7 +34,7 @@ def create_app(test_config=None):
         nav.Item('Actions', 'notjetimplemented'),
         nav.Item('Rules', 'notjetimplemented'),
         nav.Item('Admin', 'notjetimplemented')
-   ])
+        ])
 
 
     if test_config is None:
@@ -83,4 +85,4 @@ def create_app(test_config=None):
 
     return app
 
-app = create_app()
+domopiru_app = create_app()
